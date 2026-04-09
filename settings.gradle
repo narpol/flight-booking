@@ -1,0 +1,14 @@
+rootProject.name = 'flight-booking'
+
+include ':app-service'
+include ':model'
+include ':usecase'
+include ':r2dbc'
+include ':entry-points'
+
+
+project(':app-service').projectDir = file('./application/app-service')
+project(':model').projectDir = file('./domain/model')
+project(':usecase').projectDir = file('./domain/usecase')
+project(':r2dbc').projectDir = file('./infraestructure/driven-adapter/r2dbc')
+project(':entry-points').projectDir = file('./infraestructure/entry-points')

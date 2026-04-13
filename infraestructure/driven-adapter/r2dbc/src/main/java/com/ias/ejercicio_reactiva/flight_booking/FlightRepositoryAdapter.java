@@ -1,5 +1,6 @@
 package com.ias.ejercicio_reactiva.flight_booking;
 
+import com.ias.ejercicio_reactiva.flight_booking.exception.TechnicalException;
 import com.ias.ejercicio_reactiva.flight_booking.gateway.FlightRepository;
 import reactor.core.publisher.Mono;
 
@@ -7,6 +8,10 @@ public class FlightRepositoryAdapter  implements FlightRepository {
 
     @Override
     public Mono<Flight> findById(String id) {
+
+        if( id.equals("db-error")){
+            return Mono.error(new TechnicalException("Database error - conection failed"));
+        }
 
         if (id.equals("1")) {
             return Mono.just( new Flight(

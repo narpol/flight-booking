@@ -16,7 +16,7 @@ public class FlightResponseDto {
         return FlightResponseDto.builder()
                 .id(flight.getId())
                 .route(flight.getOrigin() + " - " + flight.getDestination())
-                .status("Available")
+                .status( flight.getOrigin().equals("N/A") ? "Not Available" : "Available")
                 .build();
     }
 

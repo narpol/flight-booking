@@ -1,3 +1,18 @@
 spring:
   application:
     name: flight-booking
+
+
+
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/flightdb
+    username: postgres
+    password: W300430f
+
+
+  sql:
+    init:
+      mode: always
+#      platform: postgres
+#      schema-locations: classpath:schema.sql
+#      data-locations: classpath:data.sql

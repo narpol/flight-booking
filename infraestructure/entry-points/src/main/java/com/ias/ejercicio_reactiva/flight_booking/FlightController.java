@@ -1,11 +1,10 @@
 package com.ias.ejercicio_reactiva.flight_booking;
 
 import com.ias.ejercicio_reactiva.flight_booking.dto.FlightResponseDto;
+import com.ias.ejercicio_reactiva.flight_booking.mapper.FligthMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -16,10 +15,14 @@ public class FlightController {
     private final GetFlightUseCase getFlightUseCase;
 
     @GetMapping("/{id}")
-    public Mono<FlightResponseDto> getFlightById(@PathVariable String id) {
+    public Mono<ResponseEntity<FlightResponseDto>> getFlightById(@PathVariable String id) {
         return getFlightUseCase.getFlightById(id)
-                .map(FlightResponseDto::fromDomain);
+                .map(FligthMapper::toDTO)
+                .map(ResponseEntity::ok);
     }
 
-
+    @PostMapping
+    public Mono<ResponseEntity<String>> createFlight() {
+        return Mono.just(ResponseEntity.ok("Flight created"));
+    }
 }

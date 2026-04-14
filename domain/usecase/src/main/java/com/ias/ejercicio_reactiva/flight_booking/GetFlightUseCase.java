@@ -24,7 +24,7 @@ public class GetFlightUseCase {
                 .filter(flight -> flight.getAvailableSeats() >  0)
                 .switchIfEmpty(Mono.error(new NoAvailabilityException(id)))
                 .onErrorResume( TechnicalException.class, error -> fallBackFlight(id) )
-                .delayElement(Duration.ofSeconds(3));
+                .delayElement(Duration.ofSeconds(2));
     }
 
     private Mono<Flight> fallBackFlight(String id) {

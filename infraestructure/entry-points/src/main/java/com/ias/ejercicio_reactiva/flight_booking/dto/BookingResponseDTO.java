@@ -5,11 +5,11 @@ import lombok.Data;
 
 @Data
 @Builder
-public class FlightResponseDTO {
+public class BookingResponseDTO {
 
-    private String id;
-    private String route;
+    private Long bookingId;
+    private String flightId;
+    private String passengerName;
     private String status;
-
 
 }

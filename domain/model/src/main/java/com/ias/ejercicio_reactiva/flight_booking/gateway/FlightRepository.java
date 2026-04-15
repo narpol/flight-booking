@@ -6,4 +6,6 @@ import reactor.core.publisher.Mono;
 public interface FlightRepository {
 
     Mono<Flight> findById(String id);
+
+    Mono<Flight> save(Flight flight);
 }

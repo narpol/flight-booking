@@ -8,9 +8,6 @@ public class Flight {
     private Integer capacity;
     private Integer availableSeats;
 
-    public Flight() {
-    }
-
     public Flight(String id, String origin, String destination, Integer capacity, Integer availableSeats) {
         this.id = id;
         this.origin = origin;
@@ -37,5 +34,9 @@ public class Flight {
 
     public Integer getAvailableSeats() {
         return availableSeats;
+    }
+
+    public void setAvailableSeats(Integer availableSeats) {
+        this.availableSeats = availableSeats;
     }
 }

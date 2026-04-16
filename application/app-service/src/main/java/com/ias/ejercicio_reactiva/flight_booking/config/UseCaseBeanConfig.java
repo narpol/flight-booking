@@ -1,15 +1,14 @@
 package com.ias.ejercicio_reactiva.flight_booking.config;
 
-import com.ias.ejercicio_reactiva.flight_booking.BookingRepositoryAdapter;
-import com.ias.ejercicio_reactiva.flight_booking.CreateBookingUseCase;
-import com.ias.ejercicio_reactiva.flight_booking.FlightRepositoryAdapter;
+import com.ias.ejercicio_reactiva.flight_booking.*;
 import com.ias.ejercicio_reactiva.flight_booking.dbo.BookingR2DBCRepository;
 import com.ias.ejercicio_reactiva.flight_booking.dbo.FlightR2DBCRepository;
 import com.ias.ejercicio_reactiva.flight_booking.gateway.BookingRepository;
 import com.ias.ejercicio_reactiva.flight_booking.gateway.FlightRepository;
-import com.ias.ejercicio_reactiva.flight_booking.GetFlightUseCase;
+import com.ias.ejercicio_reactiva.flight_booking.ports.ExternalFlightPort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.reactive.function.client.WebClient;
 
 @Configuration
 public class UseCaseBeanConfig {
@@ -25,6 +24,11 @@ public class UseCaseBeanConfig {
     }
 
     @Bean
+    public ExternalFlightPort flightAvailabilityPort(WebClient webClient) {
+        return new ExternalFlightAdapter(webClient);
+    }
+
+    @Bean
     public GetFlightUseCase getFlightUseCase(FlightRepository flightRepository) {
         return new GetFlightUseCase(flightRepository);
     }
@@ -32,6 +36,18 @@ public class UseCaseBeanConfig {
     @Bean
     public CreateBookingUseCase createBookingUseCase(FlightRepository flightRepository, BookingRepository bookingRepository) {
         return new CreateBookingUseCase(flightRepository, bookingRepository);
+    }
+
+    @Bean
+    public ExternalFlightAvailabilityUseCase externalFlightAvailabilityUseCase(ExternalFlightPort externalFlightPort) {
+        return new ExternalFlightAvailabilityUseCase(externalFlightPort);
+    }
+
+    @Bean
+    public WebClient webClient() {
+        return WebClient.builder()
+                .baseUrl("https://dummyjson.com")
+                .build();
     }
 
 }

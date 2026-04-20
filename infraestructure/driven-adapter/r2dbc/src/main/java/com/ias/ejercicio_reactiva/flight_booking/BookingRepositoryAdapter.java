@@ -1,13 +1,10 @@
 package com.ias.ejercicio_reactiva.flight_booking;
 
-import com.ias.ejercicio_reactiva.flight_booking.dbo.BookingDBO;
 import com.ias.ejercicio_reactiva.flight_booking.dbo.BookingR2DBCRepository;
 import com.ias.ejercicio_reactiva.flight_booking.gateway.BookingRepository;
 import com.ias.ejercicio_reactiva.flight_booking.mapper.BookingDBOMapper;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
-
-import java.util.UUID;
 
 @RequiredArgsConstructor
 public class BookingRepositoryAdapter implements BookingRepository {

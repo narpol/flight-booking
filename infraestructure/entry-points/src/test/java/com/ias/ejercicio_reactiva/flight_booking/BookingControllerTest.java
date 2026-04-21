@@ -1,6 +1,7 @@
 package com.ias.ejercicio_reactiva.flight_booking;
 
 import com.ias.ejercicio_reactiva.flight_booking.dto.BookingRequestDTO;
+import com.ias.ejercicio_reactiva.flight_booking.dto.BookingResponseDTO;
 import com.ias.ejercicio_reactiva.flight_booking.exception.NoAvailabilityException;
 import com.ias.ejercicio_reactiva.flight_booking.mapper.BookingMapper;
 import org.junit.jupiter.api.Test;
@@ -14,9 +15,10 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
 
+
 @WebFluxTest(controllers = BookingController.class)
 @Import(BookingMapper.class)
-@ContextConfiguration(classes = BookingRequestDTO.class)
+@ContextConfiguration(classes = {BookingRequestDTO.class, BookingResponseDTO.class})
 class BookingControllerTest {
 
 
@@ -94,3 +96,4 @@ class BookingControllerTest {
     }
 
 }
+
